@@ -1,0 +1,19 @@
+# Maven
+target/
+*.class
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# Logs
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers sensibles (mot de passe, config locale)
+src/main/resources/META-INF/persistence.xml
