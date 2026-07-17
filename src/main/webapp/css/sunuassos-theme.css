@@ -1,0 +1,109 @@
+/* ============================================
+   SUNUASSOS — CHARTE GRAPHIQUE OFFICIELLE
+   ============================================ */
+
+:root {
+    --sa-primary:      #0D3B66;  /* Bleu confiance */
+    --sa-primary-dark: #082a4a;
+    --sa-secondary:    #1B8A5A;  /* Vert association */
+    --sa-secondary-dark: #146b45;
+    --sa-accent:       #F4A261;  /* Orange énergie */
+    --sa-accent-dark:  #e08c42;
+    --sa-bg:           #FFFFFF;
+    --sa-text:         #2B2D42;
+    --sa-gray-light:   #EDF2F4;
+    --sa-gray-medium:  #8D99AE;
+}
+
+body {
+    background-color: var(--sa-gray-light);
+    color: var(--sa-text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-sunuassos {
+    background-color: var(--sa-primary) !important;
+}
+.navbar-sunuassos .navbar-brand {
+    color: white !important;
+    font-weight: 700;
+}
+
+/* ===== BOUTONS ===== */
+.btn-primary,
+.btn-sunuassos-primary {
+    background-color: var(--sa-primary);
+    border-color: var(--sa-primary);
+    color: white;
+}
+.btn-primary:hover,
+.btn-sunuassos-primary:hover {
+    background-color: var(--sa-primary-dark);
+    border-color: var(--sa-primary-dark);
+}
+
+.btn-success,
+.btn-sunuassos-secondary {
+    background-color: var(--sa-secondary);
+    border-color: var(--sa-secondary);
+    color: white;
+}
+.btn-success:hover,
+.btn-sunuassos-secondary:hover {
+    background-color: var(--sa-secondary-dark);
+    border-color: var(--sa-secondary-dark);
+}
+
+.btn-warning,
+.btn-sunuassos-accent {
+    background-color: var(--sa-accent);
+    border-color: var(--sa-accent);
+    color: var(--sa-text);
+}
+.btn-warning:hover,
+.btn-sunuassos-accent:hover {
+    background-color: var(--sa-accent-dark);
+    border-color: var(--sa-accent-dark);
+}
+
+/* ===== BADGES DE STATUT ===== */
+.badge.bg-success { background-color: var(--sa-secondary) !important; }
+.badge.bg-danger  { background-color: #c0392b !important; }
+.badge.bg-warning { background-color: var(--sa-accent) !important; color: var(--sa-text) !important; }
+.badge.bg-primary { background-color: var(--sa-primary) !important; }
+
+/* ===== CARTES STATISTIQUES (dashboard) ===== */
+.stat-card-blue   { background: linear-gradient(135deg, var(--sa-primary), #1d5d99); }
+.stat-card-green  { background: linear-gradient(135deg, var(--sa-secondary), #25a86f); }
+.stat-card-orange { background: linear-gradient(135deg, var(--sa-accent), #f0b380); }
+
+/* ===== CARDS ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(13, 59, 102, 0.08);
+}
+.card-header {
+    background-color: var(--sa-primary);
+    color: white;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* ===== LIENS ===== */
+a {
+    color: var(--sa-primary);
+}
+a:hover {
+    color: var(--sa-secondary);
+}
+
+/* ===== LOGO ===== */
+.sa-logo {
+    height: 50px;
+}
+
+/* ===== TABLEAUX ===== */
+.table-dark {
+    background-color: var(--sa-primary) !important;
+}

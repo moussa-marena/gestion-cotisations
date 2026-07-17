@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion — Gestion Cotisations</title>
+    <title>Connexion — SunuAssos</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="<%= request.getContextPath() %>/css/sunuassos-theme.css">
     <style>
         body {
-            background-color: #f0f2f5;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -22,11 +23,15 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .login-header {
-            background: #1a56db;
+            background: #0D3B66;
             color: white;
             border-radius: 12px 12px 0 0;
             padding: 30px;
             text-align: center;
+        }
+        .login-header img {
+            height: 70px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -35,8 +40,9 @@
 <div class="card login-card">
 
     <div class="login-header">
-        <h4 class="mb-1">🏛 Association</h4>
-        <p class="mb-0 opacity-75">Gestion des Cotisations</p>
+        <img src="<%= request.getContextPath() %>/images/logo.png" alt="SunuAssos">
+        <h4 class="mb-1">SunuAssos</h4>
+        <p class="mb-0 opacity-75">Notre association, notre force</p>
     </div>
 
     <div class="card-body p-4">

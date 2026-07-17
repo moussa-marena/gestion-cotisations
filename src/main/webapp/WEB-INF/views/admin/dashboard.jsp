@@ -1,17 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin</title>
+    <title>Dashboard Admin — SunuAssos</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/sunuassos-theme.css">
     <style>
-        body { background-color: #f0f2f5; }
+        body { background-color: #EDF2F4; }
 
         .navbar-brand { font-weight: 600; }
+        .sa-logo-nav { height: 36px; }
 
         .stat-card {
             border: none;
@@ -44,12 +48,10 @@
             margin-top: 4px;
         }
 
-        .bg-blue   { background: linear-gradient(135deg, #1a56db, #3b82f6); }
-        .bg-green  { background: linear-gradient(135deg, #057a55, #10b981); }
-        .bg-red    { background: linear-gradient(135deg, #c81e1e, #f05252); }
-        .bg-orange { background: linear-gradient(135deg, #b45309, #f59e0b); }
-        .bg-purple { background: linear-gradient(135deg, #5521b5, #8b5cf6); }
-        .bg-teal   { background: linear-gradient(135deg, #0694a2, #06b6d4); }
+        /* Palette SunuAssos appliquée */
+        .stat-card-blue   { background: linear-gradient(135deg, #0D3B66, #1d5d99); }
+        .stat-card-green  { background: linear-gradient(135deg, #1B8A5A, #25a86f); }
+        .stat-card-orange { background: linear-gradient(135deg, #F4A261, #e08c42); }
 
         .quick-link {
             display: flex;
@@ -57,17 +59,17 @@
             gap: 12px;
             padding: 14px 18px;
             border-radius: 10px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #EDF2F4;
             background: white;
             text-decoration: none;
-            color: #374151;
+            color: #2B2D42;
             transition: all .2s;
         }
         .quick-link:hover {
-            border-color: #1a56db;
-            color: #1a56db;
+            border-color: #0D3B66;
+            color: #0D3B66;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(13, 59, 102, 0.12);
         }
         .quick-link .ql-icon { font-size: 24px; }
         .quick-link .ql-text { font-size: 14px; font-weight: 500; }
@@ -81,8 +83,12 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏛 Association — Admin</span>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-sunuassos px-4">
+    <span class="navbar-brand d-flex align-items-center gap-2">
+        <img src="${pageContext.request.contextPath}/images/logo.png"
+             alt="SunuAssos" class="sa-logo-nav">
+        SunuAssos — Admin
+    </span>
     <div class="ms-auto d-flex align-items-center gap-3">
         <span class="text-white-50 small">
             Connecté : <strong class="text-white">${membre.nomComplet}</strong>
@@ -109,7 +115,7 @@
 
         <!-- Total membres -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-blue">
+            <div class="stat-card stat-card-blue">
                 <div class="icon">👥</div>
                 <div class="number">${totalMembres}</div>
                 <div class="label">Total membres</div>
@@ -119,7 +125,7 @@
 
         <!-- Membres actifs -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-green">
+            <div class="stat-card stat-card-green">
                 <div class="icon">✅</div>
                 <div class="number">${membresActifs}</div>
                 <div class="label">Membres actifs</div>
@@ -129,7 +135,7 @@
 
         <!-- Cotisations à jour -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-teal">
+            <div class="stat-card stat-card-green">
                 <div class="icon">💰</div>
                 <div class="number">${nbAJour}</div>
                 <div class="label">À jour ce mois</div>
@@ -139,7 +145,7 @@
 
         <!-- Membres en retard -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-red">
+            <div class="stat-card stat-card-orange">
                 <div class="icon">⏰</div>
                 <div class="number">${nbEnRetard}</div>
                 <div class="label">En retard</div>
@@ -149,7 +155,7 @@
 
         <!-- Total encaissé -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-purple">
+            <div class="stat-card stat-card-blue">
                 <div class="icon">📈</div>
                 <div class="number">${totalEncaisse}</div>
                 <div class="label">FCFA encaissés</div>
@@ -159,7 +165,7 @@
 
         <!-- Amendes en attente -->
         <div class="col-xl-2 col-md-4 col-sm-6">
-            <div class="stat-card bg-orange">
+            <div class="stat-card stat-card-orange">
                 <div class="icon">⚠️</div>
                 <div class="number">${nbAmendes}</div>
                 <div class="label">Amendes dues</div>
@@ -193,35 +199,35 @@
 
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
-                                    <small class="text-success fw-semibold">
+                                    <small style="color:#1B8A5A" class="fw-semibold">
                                         ✅ À jour (${nbAJour})
                                     </small>
-                                    <small class="text-success">
+                                    <small style="color:#1B8A5A">
                                         <fmt:formatNumber
                                             value="${pctAJour}"
                                             maxFractionDigits="0"/>%
                                     </small>
                                 </div>
                                 <div class="progress progress-bar-custom">
-                                    <div class="progress-bar bg-success"
-                                         style="width:${pctAJour}%"></div>
+                                    <div class="progress-bar"
+                                         style="width:${pctAJour}%; background-color:#1B8A5A"></div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
-                                    <small class="text-danger fw-semibold">
+                                    <small style="color:#F4A261" class="fw-semibold">
                                         ❌ En retard (${nbEnRetard})
                                     </small>
-                                    <small class="text-danger">
+                                    <small style="color:#F4A261">
                                         <fmt:formatNumber
                                             value="${pctRetard}"
                                             maxFractionDigits="0"/>%
                                     </small>
                                 </div>
                                 <div class="progress progress-bar-custom">
-                                    <div class="progress-bar bg-danger"
-                                         style="width:${pctRetard}%"></div>
+                                    <div class="progress-bar"
+                                         style="width:${pctRetard}%; background-color:#F4A261"></div>
                                 </div>
                             </div>
 
@@ -236,13 +242,13 @@
                     <hr>
                     <div class="d-flex justify-content-between">
                         <small class="text-muted">Total encaissé</small>
-                        <strong class="text-success">
+                        <strong style="color:#1B8A5A">
                             ${totalEncaisse} FCFA
                         </strong>
                     </div>
                     <div class="d-flex justify-content-between mt-1">
                         <small class="text-muted">Amendes en attente</small>
-                        <strong class="text-danger">
+                        <strong style="color:#F4A261">
                             ${totalAmendes} FCFA
                         </strong>
                     </div>
@@ -317,7 +323,7 @@
                                 <span class="ql-icon">⏰</span>
                                 <div>
                                     <div class="ql-text">Membres en retard</div>
-                                    <small class="text-danger fw-semibold">
+                                    <small style="color:#F4A261" class="fw-semibold">
                                         ${nbEnRetard} en retard
                                     </small>
                                 </div>
@@ -330,7 +336,7 @@
                                 <span class="ql-icon">⚠️</span>
                                 <div>
                                     <div class="ql-text">Amendes</div>
-                                    <small class="text-danger fw-semibold">
+                                    <small style="color:#F4A261" class="fw-semibold">
                                         ${nbAmendes} en attente
                                     </small>
                                 </div>
