@@ -134,6 +134,16 @@
             </small>
         </div>
         <div class="d-flex gap-2">
+            <a href="${pageContext.request.contextPath}/admin/export?type=pdf&donnee=cotisations"
+               class="btn btn-sm"
+               style="background-color:#c0392b; color:white; border-radius:8px; padding:6px 14px;">
+               📄 PDF
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/export?type=excel&donnee=cotisations"
+               class="btn btn-sm"
+               style="background-color:#1B8A5A; color:white; border-radius:8px; padding:6px 14px;">
+               📊 Excel
+            </a>
             <a href="${pageContext.request.contextPath}/dashboard/admin"
                class="btn-retour">← Dashboard</a>
             <a href="${pageContext.request.contextPath}/admin/cotisations?action=retard&mois=${mois}&annee=${annee}"

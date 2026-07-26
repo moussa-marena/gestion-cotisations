@@ -4,6 +4,7 @@ import com.association.dao.MembreDAO;
 import com.association.model.Membre;
 import com.association.model.Role;
 import com.association.model.StatutMembre;
+import com.association.util.EmailUtil;
 import com.association.util.PasswordUtil;
 
 import java.util.Date;
@@ -34,6 +35,9 @@ public class MembreService {
         m.setRole(Role.valueOf(role));
 
         dao.save(m);
+
+        // Envoyer email de bienvenue
+        EmailUtil.envoyerBienvenue(m.getEmail(), m.getNomComplet());
     }
 
     // ===== MODIFIER =====
@@ -89,9 +93,9 @@ public class MembreService {
     }
 
     // ===== LIRE =====
-    public Membre findById(Long id) { return dao.findById(id); }
-    public List<Membre> findAll()   { return dao.findAll(); }
+    public Membre findById(Long id)            { return dao.findById(id); }
+    public List<Membre> findAll()              { return dao.findAll(); }
     public List<Membre> search(String keyword) { return dao.search(keyword); }
-    public long count()             { return dao.count(); }
-    public long countActifs()       { return dao.countActifs(); }
+    public long count()                        { return dao.count(); }
+    public long countActifs()                  { return dao.countActifs(); }
 }

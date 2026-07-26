@@ -147,6 +147,16 @@
             </small>
         </div>
         <div class="d-flex gap-2">
+            <a href="${pageContext.request.contextPath}/admin/export?type=pdf&donnee=membres"
+               class="btn btn-sm"
+               style="background-color:#c0392b; color:white; border-radius:8px; padding:6px 14px;">
+               📄 PDF
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/export?type=excel&donnee=membres"
+               class="btn btn-sm"
+               style="background-color:#1B8A5A; color:white; border-radius:8px; padding:6px 14px;">
+               📊 Excel
+            </a>
             <a href="${pageContext.request.contextPath}/dashboard/admin"
                class="btn-retour">← Dashboard</a>
             <a href="${pageContext.request.contextPath}/admin/membres?action=ajouter"
@@ -286,4 +296,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

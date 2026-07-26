@@ -5,6 +5,7 @@ import com.association.dao.MembreDAO;
 import com.association.model.Amende;
 import com.association.model.Membre;
 import com.association.model.StatutAmende;
+import com.association.util.EmailUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,8 +13,8 @@ import java.util.List;
 
 public class AmendeService {
 
-    private final AmendeDAO   amendeDAO   = new AmendeDAO();
-    private final MembreDAO   membreDAO   = new MembreDAO();
+    private final AmendeDAO         amendeDAO         = new AmendeDAO();
+    private final MembreDAO         membreDAO         = new MembreDAO();
     private final CotisationService cotisationService = new CotisationService();
 
     // Montant fixe de l'amende
@@ -49,6 +50,15 @@ public class AmendeService {
             amende.setAnneeConcernee(annee);
 
             amendeDAO.save(amende);
+
+            // Envoyer email de notification
+            EmailUtil.envoyerNotificationAmende(
+                membre.getEmail(),
+                membre.getNomComplet(),
+                amende.getMotif(),
+                amende.getMontant()
+            );
+
             resultats.add("✅ Amende générée pour "
                 + membre.getNomComplet());
         }
@@ -88,9 +98,9 @@ public class AmendeService {
     }
 
     // ===== LIRE =====
-    public List<Amende> findAll()           { return amendeDAO.findAll(); }
-    public List<Amende> findAllEnAttente()  { return amendeDAO.findAllEnAttente(); }
-    public Amende       findById(Long id)   { return amendeDAO.findById(id); }
+    public List<Amende> findAll()          { return amendeDAO.findAll(); }
+    public List<Amende> findAllEnAttente() { return amendeDAO.findAllEnAttente(); }
+    public Amende       findById(Long id)  { return amendeDAO.findById(id); }
 
     public List<Amende> findByMembre(Long membreId) {
         return amendeDAO.findByMembre(membreId);

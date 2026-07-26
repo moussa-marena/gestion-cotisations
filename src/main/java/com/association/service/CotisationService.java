@@ -7,6 +7,7 @@ import com.association.model.Membre;
 import com.association.model.ModePaiement;
 import com.association.model.StatutCotisation;
 import com.association.model.StatutMembre;
+import com.association.util.EmailUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +50,14 @@ public class CotisationService {
         c.setReference(reference);
 
         cotisationDAO.save(c);
+
+        // Envoyer email de confirmation
+        EmailUtil.envoyerConfirmationCotisation(
+            membre.getEmail(),
+            membre.getNomComplet(),
+            c.getPeriode(),
+            c.getMontant()
+        );
     }
 
     // ===== MEMBRES EN RETARD POUR UN MOIS/ANNÉE =====

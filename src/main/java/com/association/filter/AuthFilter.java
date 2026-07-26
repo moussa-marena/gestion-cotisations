@@ -21,7 +21,7 @@ public class AuthFilter implements Filter {
         "/login.jsp",
         "/reset-password",
         "/test-connexion",
-        "/init-membres"
+        "/init-membres"       
     );
 
     // URLs accessibles uniquement par les admins
@@ -29,7 +29,8 @@ public class AuthFilter implements Filter {
         "/dashboard/admin",
         "/admin/membres",
         "/admin/cotisations",
-        "/admin/amendes"
+        "/admin/amendes",
+        "/admin/export"
     );
 
     // Ressources statiques (toujours accessibles)
@@ -52,7 +53,7 @@ public class AuthFilter implements Filter {
         HttpServletRequest  request  = (HttpServletRequest)  servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String uri = request.getRequestURI();
+        String uri         = request.getRequestURI();
         String contextPath = request.getContextPath();
 
         // Chemin relatif sans le context path
