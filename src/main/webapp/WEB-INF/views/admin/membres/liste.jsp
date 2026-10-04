@@ -146,15 +146,17 @@
                 Actifs : <strong>${actifs}</strong>
             </small>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 flex-wrap">
             <a href="${pageContext.request.contextPath}/admin/export?type=pdf&donnee=membres"
                class="btn btn-sm"
-               style="background-color:#c0392b; color:white; border-radius:8px; padding:6px 14px;">
+               style="background-color:#c0392b; color:white;
+                      border-radius:8px; padding:6px 14px;">
                📄 PDF
             </a>
             <a href="${pageContext.request.contextPath}/admin/export?type=excel&donnee=membres"
                class="btn btn-sm"
-               style="background-color:#1B8A5A; color:white; border-radius:8px; padding:6px 14px;">
+               style="background-color:#1B8A5A; color:white;
+                      border-radius:8px; padding:6px 14px;">
                📊 Excel
             </a>
             <a href="${pageContext.request.contextPath}/dashboard/admin"
@@ -167,16 +169,22 @@
     <!-- Messages -->
     <c:if test="${param.succes != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#d4edda; border-left:4px solid #1B8A5A; border-radius:8px;">
+             style="background-color:#d4edda;
+                    border-left:4px solid #1B8A5A;
+                    border-radius:8px;">
             ✅ ${param.succes}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
     <c:if test="${param.erreur != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#fde8e8; border-left:4px solid #c0392b; border-radius:8px;">
+             style="background-color:#fde8e8;
+                    border-left:4px solid #c0392b;
+                    border-radius:8px;">
             ❌ ${param.erreur}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
 
@@ -184,8 +192,9 @@
     <div class="card mb-4">
         <div class="card-body">
             <form action="${pageContext.request.contextPath}/admin/membres"
-                  method="get" class="d-flex gap-2">
+                  method="get" class="d-flex gap-2 flex-wrap">
                 <input type="text" name="search" class="form-control"
+                       style="min-width:200px;"
                        placeholder="Rechercher par nom, prénom ou email..."
                        value="${keyword}">
                 <button type="submit" class="btn-rechercher">
@@ -202,6 +211,7 @@
     <!-- Tableau -->
     <div class="card">
         <div class="card-body p-0">
+            <div style="overflow-x: auto;">
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
@@ -240,46 +250,50 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${m.role == 'ADMIN'}">
-                                                <span class="badge-admin">ADMIN</span>
+                                                <span class="badge-admin">
+                                                    ADMIN
+                                                </span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="badge-membre">MEMBRE</span>
+                                                <span class="badge-membre">
+                                                    MEMBRE
+                                                </span>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${m.statut == 'ACTIF'}">
-                                                <span class="badge-actif">ACTIF</span>
+                                                <span class="badge-actif">
+                                                    ACTIF
+                                                </span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="badge-inactif">INACTIF</span>
+                                                <span class="badge-inactif">
+                                                    INACTIF
+                                                </span>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
                                     <td>${m.dateAdhesion}</td>
                                     <td class="text-center">
-                                        <!-- Modifier -->
                                         <a href="${pageContext.request.contextPath}/admin/membres?action=modifier&id=${m.id}"
                                            class="btn btn-sm"
-                                           style="background-color:#F4A261; color:#2B2D42;">
-                                            ✏️
-                                        </a>
-
-                                        <!-- Toggle statut -->
+                                           style="background-color:#F4A261;
+                                                  color:#2B2D42;">✏️</a>
                                         <a href="${pageContext.request.contextPath}/admin/membres?action=toggle&id=${m.id}"
                                            class="btn btn-sm"
                                            style="${m.statut == 'ACTIF'
-                                               ? 'background-color:#8D99AE; color:white;'
-                                               : 'background-color:#1B8A5A; color:white;'}"
-                                           onclick="return confirm('Changer le statut de ce membre ?')">
+                                               ? 'background-color:#8D99AE;color:white;'
+                                               : 'background-color:#1B8A5A;color:white;'}"
+                                           onclick="return confirm(
+                                               'Changer le statut de ce membre ?')">
                                             ${m.statut == 'ACTIF' ? '🔒' : '🔓'}
                                         </a>
-
-                                        <!-- Supprimer -->
                                         <a href="${pageContext.request.contextPath}/admin/membres?action=supprimer&id=${m.id}"
                                            class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Supprimer ce membre définitivement ?')">
+                                           onclick="return confirm(
+                                               'Supprimer ce membre définitivement ?')">
                                             🗑️
                                         </a>
                                     </td>
@@ -289,6 +303,7 @@
                     </c:choose>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 

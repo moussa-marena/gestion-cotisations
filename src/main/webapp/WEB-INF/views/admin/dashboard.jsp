@@ -48,7 +48,6 @@
             margin-top: 4px;
         }
 
-        /* Palette SunuAssos appliquée */
         .stat-card-blue   { background: linear-gradient(135deg, #0D3B66, #1d5d99); }
         .stat-card-green  { background: linear-gradient(135deg, #1B8A5A, #25a86f); }
         .stat-card-orange { background: linear-gradient(135deg, #F4A261, #e08c42); }
@@ -69,7 +68,7 @@
             border-color: #0D3B66;
             color: #0D3B66;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(13, 59, 102, 0.12);
+            box-shadow: 0 4px 12px rgba(13,59,102,0.12);
         }
         .quick-link .ql-icon { font-size: 24px; }
         .quick-link .ql-text { font-size: 14px; font-weight: 500; }
@@ -78,20 +77,30 @@
             height: 8px;
             border-radius: 4px;
         }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(13,59,102,0.08);
+        }
     </style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-sunuassos px-4">
-    <span class="navbar-brand d-flex align-items-center gap-2">
+<nav class="navbar navbar-expand-lg navbar-dark px-4"
+     style="background-color: #0D3B66;">
+    <a class="navbar-brand d-flex align-items-center gap-2"
+       href="${pageContext.request.contextPath}/dashboard/admin">
         <img src="${pageContext.request.contextPath}/images/logo.png"
              alt="SunuAssos" class="sa-logo-nav">
         SunuAssos — Admin
-    </span>
+    </a>
     <div class="ms-auto d-flex align-items-center gap-3">
         <span class="text-white-50 small">
-            Connecté : <strong class="text-white">${membre.nomComplet}</strong>
+            Connecté : <strong class="text-white">
+                ${membre.nomComplet}
+            </strong>
         </span>
         <a href="${pageContext.request.contextPath}/logout"
            class="btn btn-sm btn-outline-light">
@@ -113,7 +122,6 @@
     <!-- CARTES STATISTIQUES -->
     <div class="row g-3 mb-4">
 
-        <!-- Total membres -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-blue">
                 <div class="icon">👥</div>
@@ -123,7 +131,6 @@
             </div>
         </div>
 
-        <!-- Membres actifs -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-green">
                 <div class="icon">✅</div>
@@ -133,7 +140,6 @@
             </div>
         </div>
 
-        <!-- Cotisations à jour -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-green">
                 <div class="icon">💰</div>
@@ -143,7 +149,6 @@
             </div>
         </div>
 
-        <!-- Membres en retard -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-orange">
                 <div class="icon">⏰</div>
@@ -153,7 +158,6 @@
             </div>
         </div>
 
-        <!-- Total encaissé -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-blue">
                 <div class="icon">📈</div>
@@ -163,7 +167,6 @@
             </div>
         </div>
 
-        <!-- Amendes en attente -->
         <div class="col-xl-2 col-md-4 col-sm-6">
             <div class="stat-card stat-card-orange">
                 <div class="icon">⚠️</div>
@@ -179,19 +182,16 @@
 
         <!-- Taux de paiement -->
         <div class="col-lg-5">
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card h-100">
                 <div class="card-body">
                     <h6 class="card-title fw-semibold mb-3">
                         📊 Taux de paiement — ${nomMois} ${annee}
                     </h6>
 
-                    <%-- Calcul du taux --%>
-                    <c:set var="total"
-                           value="${nbAJour + nbEnRetard}"/>
+                    <c:set var="total" value="${nbAJour + nbEnRetard}"/>
 
                     <c:choose>
                         <c:when test="${total > 0}">
-                            <%-- Pourcentage à jour --%>
                             <c:set var="pctAJour"
                                    value="${(nbAJour * 100) / total}"/>
                             <c:set var="pctRetard"
@@ -199,7 +199,8 @@
 
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
-                                    <small style="color:#1B8A5A" class="fw-semibold">
+                                    <small style="color:#1B8A5A"
+                                           class="fw-semibold">
                                         ✅ À jour (${nbAJour})
                                     </small>
                                     <small style="color:#1B8A5A">
@@ -210,13 +211,16 @@
                                 </div>
                                 <div class="progress progress-bar-custom">
                                     <div class="progress-bar"
-                                         style="width:${pctAJour}%; background-color:#1B8A5A"></div>
+                                         style="width:${pctAJour}%;
+                                                background-color:#1B8A5A">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
-                                    <small style="color:#F4A261" class="fw-semibold">
+                                    <small style="color:#F4A261"
+                                           class="fw-semibold">
                                         ❌ En retard (${nbEnRetard})
                                     </small>
                                     <small style="color:#F4A261">
@@ -227,7 +231,9 @@
                                 </div>
                                 <div class="progress progress-bar-custom">
                                     <div class="progress-bar"
-                                         style="width:${pctRetard}%; background-color:#F4A261"></div>
+                                         style="width:${pctRetard}%;
+                                                background-color:#F4A261">
+                                    </div>
                                 </div>
                             </div>
 
@@ -258,7 +264,7 @@
 
         <!-- Accès rapides -->
         <div class="col-lg-7">
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card h-100">
                 <div class="card-body">
                     <h6 class="card-title fw-semibold mb-3">
                         ⚡ Accès rapides
@@ -323,7 +329,8 @@
                                 <span class="ql-icon">⏰</span>
                                 <div>
                                     <div class="ql-text">Membres en retard</div>
-                                    <small style="color:#F4A261" class="fw-semibold">
+                                    <small style="color:#F4A261"
+                                           class="fw-semibold">
                                         ${nbEnRetard} en retard
                                     </small>
                                 </div>
@@ -336,7 +343,8 @@
                                 <span class="ql-icon">⚠️</span>
                                 <div>
                                     <div class="ql-text">Amendes</div>
-                                    <small style="color:#F4A261" class="fw-semibold">
+                                    <small style="color:#F4A261"
+                                           class="fw-semibold">
                                         ${nbAmendes} en attente
                                     </small>
                                 </div>
@@ -351,6 +359,22 @@
                                     <div class="ql-text">Générer amendes</div>
                                     <small class="text-muted">
                                         ${nomMois} ${annee}
+                                    </small>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- NOUVEAU : Historique connexions -->
+                        <div class="col-md-6">
+                            <a href="${pageContext.request.contextPath}/admin/historique"
+                               class="quick-link">
+                                <span class="ql-icon">🔐</span>
+                                <div>
+                                    <div class="ql-text">
+                                        Historique connexions
+                                    </div>
+                                    <small class="text-muted">
+                                        Logs &amp; tentatives
                                     </small>
                                 </div>
                             </a>

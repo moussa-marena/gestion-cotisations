@@ -45,10 +45,7 @@
             font-weight: 600;
         }
 
-        .montant {
-            color: #1B8A5A;
-            font-weight: 700;
-        }
+        .montant { color: #1B8A5A; font-weight: 700; }
 
         .btn-retour {
             background: transparent;
@@ -133,15 +130,17 @@
                 En retard : <strong>${nbEnRetard}</strong>
             </small>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 flex-wrap">
             <a href="${pageContext.request.contextPath}/admin/export?type=pdf&donnee=cotisations"
                class="btn btn-sm"
-               style="background-color:#c0392b; color:white; border-radius:8px; padding:6px 14px;">
+               style="background-color:#c0392b; color:white;
+                      border-radius:8px; padding:6px 14px;">
                📄 PDF
             </a>
             <a href="${pageContext.request.contextPath}/admin/export?type=excel&donnee=cotisations"
                class="btn btn-sm"
-               style="background-color:#1B8A5A; color:white; border-radius:8px; padding:6px 14px;">
+               style="background-color:#1B8A5A; color:white;
+                      border-radius:8px; padding:6px 14px;">
                📊 Excel
             </a>
             <a href="${pageContext.request.contextPath}/dashboard/admin"
@@ -156,16 +155,22 @@
     <!-- Messages -->
     <c:if test="${param.succes != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#d4edda; border-left:4px solid #1B8A5A; border-radius:8px;">
+             style="background-color:#d4edda;
+                    border-left:4px solid #1B8A5A;
+                    border-radius:8px;">
             ✅ ${param.succes}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
     <c:if test="${param.erreur != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#fde8e8; border-left:4px solid #c0392b; border-radius:8px;">
+             style="background-color:#fde8e8;
+                    border-left:4px solid #c0392b;
+                    border-radius:8px;">
             ❌ ${param.erreur}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
 
@@ -173,14 +178,14 @@
     <div class="card mb-4">
         <div class="card-body">
             <form action="${pageContext.request.contextPath}/admin/cotisations"
-                  method="get" class="d-flex gap-2 align-items-end">
+                  method="get"
+                  class="d-flex gap-2 align-items-end flex-wrap">
                 <div>
                     <label class="form-label mb-1">Mois</label>
                     <select name="mois" class="form-select">
                         <c:forEach begin="1" end="12" var="m">
-                            <option value="${m}" ${m == mois ? 'selected' : ''}>
-                                ${m}
-                            </option>
+                            <option value="${m}"
+                                ${m == mois ? 'selected' : ''}>${m}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -199,6 +204,7 @@
     <!-- Tableau -->
     <div class="card">
         <div class="card-body p-0">
+            <div style="overflow-x: auto;">
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
@@ -220,7 +226,8 @@
                                 <td colspan="9"
                                     class="text-center py-4"
                                     style="color:#8D99AE;">
-                                    Aucune cotisation pour ${nomMois} ${annee}.
+                                    Aucune cotisation pour
+                                    ${nomMois} ${annee}.
                                 </td>
                             </tr>
                         </c:when>
@@ -250,7 +257,8 @@
                                     <td class="text-center">
                                         <a href="${pageContext.request.contextPath}/admin/cotisations?action=supprimer&id=${c.id}"
                                            class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Supprimer cette cotisation ?')">
+                                           onclick="return confirm(
+                                               'Supprimer cette cotisation ?')">
                                             🗑️
                                         </a>
                                     </td>
@@ -260,6 +268,7 @@
                     </c:choose>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 

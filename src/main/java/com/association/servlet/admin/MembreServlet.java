@@ -2,6 +2,7 @@ package com.association.servlet.admin;
 
 import com.association.model.Membre;
 import com.association.service.MembreService;
+import com.association.util.ValidationUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/admin/membres")
 public class MembreServlet extends HttpServlet {
@@ -116,13 +118,32 @@ public class MembreServlet extends HttpServlet {
             String mdp       = request.getParameter("motDePasse");
             String role      = request.getParameter("role");
 
+            // ===== VALIDATION SERVEUR =====
+            Map<String, String> erreurs =
+                ValidationUtil.validerMembre(
+                    nom, prenom, email, telephone, mdp, true);
+
+            if (ValidationUtil.hasErreurs(erreurs)) {
+                request.setAttribute("erreurs",   erreurs);
+                request.setAttribute("nom",       nom);
+                request.setAttribute("prenom",    prenom);
+                request.setAttribute("email",     email);
+                request.setAttribute("telephone", telephone);
+                request.setAttribute("adresse",   adresse);
+                request.getRequestDispatcher(
+                    "/WEB-INF/views/admin/membres/ajouter.jsp")
+                    .forward(request, response);
+                return;
+            }
+
             try {
                 service.creer(nom, prenom, email,
                               telephone, adresse, mdp, role);
                 response.sendRedirect(request.getContextPath()
                     + "/admin/membres?succes=Membre+ajouté+avec+succès");
             } catch (Exception e) {
-                request.setAttribute("erreur", e.getMessage());
+                request.setAttribute("erreurs",
+                    Map.of("general", e.getMessage()));
                 request.setAttribute("nom",       nom);
                 request.setAttribute("prenom",    prenom);
                 request.setAttribute("email",     email);
@@ -143,6 +164,21 @@ public class MembreServlet extends HttpServlet {
             String adresse   = request.getParameter("adresse");
             String role      = request.getParameter("role");
 
+            // ===== VALIDATION SERVEUR =====
+            Map<String, String> erreurs =
+                ValidationUtil.validerMembre(
+                    nom, prenom, email, telephone, null, false);
+
+            if (ValidationUtil.hasErreurs(erreurs)) {
+                Membre m = service.findById(id);
+                request.setAttribute("membre",  m);
+                request.setAttribute("erreurs", erreurs);
+                request.getRequestDispatcher(
+                    "/WEB-INF/views/admin/membres/modifier.jsp")
+                    .forward(request, response);
+                return;
+            }
+
             try {
                 service.modifier(id, nom, prenom, email,
                                  telephone, adresse, role);
@@ -150,8 +186,9 @@ public class MembreServlet extends HttpServlet {
                     + "/admin/membres?succes=Membre+modifié+avec+succès");
             } catch (Exception e) {
                 Membre m = service.findById(id);
-                request.setAttribute("membre", m);
-                request.setAttribute("erreur", e.getMessage());
+                request.setAttribute("membre",  m);
+                request.setAttribute("erreurs",
+                    Map.of("general", e.getMessage()));
                 request.getRequestDispatcher(
                     "/WEB-INF/views/admin/membres/modifier.jsp")
                     .forward(request, response);

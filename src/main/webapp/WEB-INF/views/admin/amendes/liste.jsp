@@ -68,6 +68,7 @@
             border-radius: 8px;
             padding: 6px 16px;
             font-size: 14px;
+            text-decoration: none;
         }
         .btn-retour:hover { background: white; color: #0D3B66; }
 
@@ -79,6 +80,7 @@
             padding: 6px 16px;
             font-size: 14px;
             font-weight: 600;
+            text-decoration: none;
         }
         .btn-generer:hover { background-color: #e08c42; color: #2B2D42; }
 
@@ -113,7 +115,7 @@
                 Total dû : <strong>${totalEnAttente} FCFA</strong>
             </small>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 flex-wrap">
             <a href="${pageContext.request.contextPath}/dashboard/admin"
                class="btn-retour">← Dashboard</a>
             <a href="${pageContext.request.contextPath}/admin/amendes?action=generer"
@@ -124,22 +126,29 @@
     <!-- Messages -->
     <c:if test="${param.succes != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#d4edda; border-left: 4px solid #1B8A5A; border-radius:8px;">
+             style="background-color:#d4edda;
+                    border-left:4px solid #1B8A5A;
+                    border-radius:8px;">
             ✅ ${param.succes}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
     <c:if test="${param.erreur != null}">
         <div class="alert alert-dismissible fade show mb-3"
-             style="background-color:#fde8e8; border-left: 4px solid #c0392b; border-radius:8px;">
+             style="background-color:#fde8e8;
+                    border-left:4px solid #c0392b;
+                    border-radius:8px;">
             ❌ ${param.erreur}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
         </div>
     </c:if>
 
     <!-- Tableau -->
     <div class="card">
         <div class="card-body p-0">
+            <div style="overflow-x: auto;">
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
@@ -186,7 +195,9 @@
                                                 ${a.datePaiement}
                                             </c:when>
                                             <c:otherwise>
-                                                <span style="color:#8D99AE;">—</span>
+                                                <span style="color:#8D99AE;">
+                                                    —
+                                                </span>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
@@ -213,20 +224,25 @@
                                         <c:if test="${a.statut == 'EN_ATTENTE'}">
                                             <a href="${pageContext.request.contextPath}/admin/amendes?action=payer&id=${a.id}"
                                                class="btn btn-sm"
-                                               style="background-color:#1B8A5A; color:white;"
-                                               onclick="return confirm('Marquer cette amende comme payée ?')">
+                                               style="background-color:#1B8A5A;
+                                                      color:white;"
+                                               onclick="return confirm(
+                                                   'Marquer cette amende comme payée ?')">
                                                 💵
                                             </a>
                                             <a href="${pageContext.request.contextPath}/admin/amendes?action=annuler&id=${a.id}"
                                                class="btn btn-sm"
-                                               style="background-color:#8D99AE; color:white;"
-                                               onclick="return confirm('Annuler cette amende ?')">
+                                               style="background-color:#8D99AE;
+                                                      color:white;"
+                                               onclick="return confirm(
+                                                   'Annuler cette amende ?')">
                                                 ✕
                                             </a>
                                         </c:if>
                                         <a href="${pageContext.request.contextPath}/admin/amendes?action=supprimer&id=${a.id}"
                                            class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Supprimer définitivement cette amende ?')">
+                                           onclick="return confirm(
+                                               'Supprimer définitivement ?')">
                                             🗑️
                                         </a>
                                     </td>
@@ -236,6 +252,7 @@
                     </c:choose>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 

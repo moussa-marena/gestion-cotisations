@@ -21,7 +21,7 @@ public class AuthFilter implements Filter {
         "/login.jsp",
         "/reset-password",
         "/test-connexion",
-        "/init-membres"       
+        "/init-membres"
     );
 
     // URLs accessibles uniquement par les admins
@@ -30,7 +30,8 @@ public class AuthFilter implements Filter {
         "/admin/membres",
         "/admin/cotisations",
         "/admin/amendes",
-        "/admin/export"
+        "/admin/export",
+        "/admin/historique"
     );
 
     // Ressources statiques (toujours accessibles)
@@ -55,10 +56,7 @@ public class AuthFilter implements Filter {
 
         String uri         = request.getRequestURI();
         String contextPath = request.getContextPath();
-
-        // Chemin relatif sans le context path
-        // ex: /gestion-cotisations/dashboard/admin → /dashboard/admin
-        String path = uri.substring(contextPath.length());
+        String path        = uri.substring(contextPath.length());
 
         // ===== 1. Laisser passer les ressources statiques =====
         if (estRessourceStatique(path)) {
@@ -87,7 +85,6 @@ public class AuthFilter implements Filter {
 
         // ===== 4. Vérifier le rôle pour les URLs admin =====
         if (estUrlAdmin(path) && !Role.ADMIN.equals(membre.getRole())) {
-            // Membre normal qui essaie d'accéder à une page admin
             response.sendRedirect(
                 contextPath + "/dashboard/membre?acces=refuse");
             return;
